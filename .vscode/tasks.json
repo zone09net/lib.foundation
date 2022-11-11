@@ -1,0 +1,54 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "typescript",
+			"tsconfig": "tsconfig.json",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"label": "tsc: build - tsconfig.json"
+		},
+		{
+			"type": "typescript",
+			"tsconfig": "tsconfig.json",
+			"option": "watch",
+			"problemMatcher": [
+				"$tsc-watch"
+			],
+			"group": "build",
+			"label": "tsc: watch - tsconfig.json"
+		},
+		{
+			"label": "[zone09.net] rollup",
+			"type": "shell",
+			"command": "rollup --config rollup.config.js",
+			"group": "build"
+		},
+		{
+			"label": "[zone09.net] obfuscator",
+			"type": "shell",
+			"command": "javascript-obfuscator ./rollup --output ../www.zone09.net/public/js --compact true --exclude rollup/extlib/**/**",
+			"group": "build",
+			"dependsOn": []
+		},
+		{
+			"label": "[zone09.net] deploy",
+			"type": "shell",
+			"group": "build",
+			"presentation": {
+				"panel": "new"
+			},
+			"dependsOn": [
+				"[zone09.net] rollup",
+				"[zone09.net] obfuscator",
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		}
+	]
+}

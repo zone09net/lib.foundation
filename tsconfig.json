@@ -1,0 +1,35 @@
+{
+	"compileOnSave": true,
+
+	"compilerOptions": {
+		"target": "es2017",
+		"module": "es6",
+		"moduleResolution": "node",
+		"lib": [
+			"dom", 
+			"es2018"
+		],
+		
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"noEmitOnError": false,
+		"allowJs": false,
+		"watch": true,
+		"declaration": true,
+		"declarationMap": true,
+		"outDir": "./.dist",
+		"baseUrl": "../",
+	},
+
+	"tsc-alias": {
+		"verbose": true,
+		"resolveFullPaths": true,
+	 },
+
+	"exclude": [
+		"./node_modules",
+		"./.dist",
+		"./.rollup"
+	]
+}

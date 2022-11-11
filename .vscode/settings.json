@@ -1,0 +1,159 @@
+// Place your settings in this file to overwrite the default settings
+{
+	"workbench.colorTheme": "Atom One Dark",
+	"workbench.iconTheme": "vscode-icons",
+	"explorer.confirmDelete": false,
+	"breadcrumbs.enabled": false,
+	"terminal.explorerKind": "external",
+	"terminal.integrated.defaultProfile.windows": "Command Prompt",
+   "terminal.integrated.automationShell.windows": "cmd.exe",
+   
+   "php.suggest.basic": false,
+	
+   //"intelephense.files.exclude": [
+	//	"**/.git/**",
+	//  	"**/.svn/**",
+	//  	"**/.hg/**",
+	//  	"**/CVS/**",
+	//  	"**/.DS_Store/**",
+	//  	"**/node_modules/**",
+	//  	"**/bower_components/**",
+	//  	"**/vendor/**/{Test,test,Tests,tests}/**/*Test.php"
+	//],
+
+	"editor.minimap.enabled": false,
+	"editor.renderWhitespace": "none",
+   "editor.quickSuggestions": { "comments": true },
+	"editor.tabSize": 3,
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				"scope": [
+					"comment"
+				],
+				"settings": {
+					"foreground": "#8c6325"
+				}
+			},
+			{
+				"scope": [
+					"comment.block.documentation",
+					"punctuation.definition.comment"
+				],
+				"settings": {
+					"foreground": "#8c6325"
+				}
+			}
+		],
+	},
+
+	"todohighlight.keywords": [
+		{
+			"text": "@param",
+			"color": "#deaf2f",
+			"backgroundColor": "#282C34",
+	   },
+		{
+			"text": "@return",
+			"color": "#d66f2f",
+			"backgroundColor": "#282C34",
+			//"overviewRulerColor": "STEELBLUE",
+			//"border": "1px solid STEELBLUE",
+			// "borderRadius": "3px",
+			// "isWholeLine": false
+	   },
+		{
+			"text": "@todo",
+			"color": "#bd3a2e",
+			"backgroundColor": "#282C34",
+	   },
+		{
+			"text": "@fixme",
+			"color": "#869149",
+			"backgroundColor": "#282C34",
+	  	},
+		{
+			"text": "@internal",
+			"color": "#8c6325",
+			"backgroundColor": "#282C34",
+	  	},
+		  {
+			"text": "@ignore",
+			"color": "#8c6325",
+			"backgroundColor": "#282C34",
+	  	},
+		{
+			"text": "@module",
+			"color": "#8c6325",
+			"backgroundColor": "#282C34",
+	  	},
+  ],
+
+  "better-comments.tags": [
+		{
+			"tag": "@param",
+			"color": "#deaf2f",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "@return",
+			"color": "#d66f2f",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "@todo",
+			"color": "#bd3a2e",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "@fixme",
+			"color": "#869149",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "@internal",
+			"color": "#8c6325",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "@ignore",
+			"color": "#8c6325",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "@module",
+			"color": "#8c6325",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+	],
+}

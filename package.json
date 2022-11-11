@@ -1,0 +1,22 @@
+{
+	"name": "@zone09.net/foundation",
+	"version": "1.0.0",
+	"description": "",
+  	"author": "Régis Côté",
+  	"license": "Proprietary",
+  	"homepage": "https://www.zone09.net",
+	  
+	"scripts": {
+		"clean:dist": "if exist .dist rmdir /s /q .dist",
+		"clean:rollup": "if exist .rollup rmdir /s /q .rollup",
+		"clean:obfuscator": "if exist .obfuscator rmdir /s /q .obfuscator",
+		"clean:minify": "if exist .minify rmdir /s /q .minify",
+		"clean": "concurrently --kill-others \"npm run clean:dist\" \"npm run clean:rollup\" \"npm run clean:obfuscator\" \"npm run clean:minify\"",
+		
+   	"build": "tsc --build && tsc-alias",
+		"build:watch": "concurrently --kill-others -p \"[{name}]\" -n \"watch,alias\" -c \"red.bold,yellow.bold\" \"tsc -w\" \"tsc-alias -w\"",
+		"rollup": "tsc --build --force && rollup -c rollup.config.js",
+		"obfuscator": "javascript-obfuscator ./.rollup --output ./.obfuscator --compact true --exclude ./rollup/extlib/**/**",
+		"minify": "if not exist .minify mkdir .minify && minify ./.rollup/lib.foundation.js > ./.minify/lib.foundation.js"
+  	}
+}
