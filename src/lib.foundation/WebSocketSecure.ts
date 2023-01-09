@@ -15,7 +15,6 @@ export class WebSocketSecure
 	private _parsers: Map<string, IWebSocketSecureAttachable> = new Map();
 	private _closers: Map<string, IWebSocketSecureAttachable> = new Map();
 	private _parser: IWebSocketSecureAttachable;
-	private _closer: IWebSocketSecureAttachable;
 	private _link: string;
 	//---
 
@@ -30,6 +29,10 @@ export class WebSocketSecure
 		}
 		else
 			this._parser = {callback: (raw: IWebSocketSecureRaw, smuggler: any): IWebSocketSecureCallback => { return {success: true, response: raw.response}; }, smuggler: {}};
+
+
+		if(attributes.closer)
+			this.attachCloser(attributes.closer);
 	}
 
 	public attachParser(attachable: IWebSocketSecureAttachable): string
@@ -99,46 +102,51 @@ export class WebSocketSecure
 
 			this._ws.onerror = (event) =>
 			{
+				//this._closers.forEach((value, key, map) => {
+				//	value.callback({response: 'socket connection closed unexpectedly'}, value.smuggler);
+				//});
+
 				clearTimeout(this._timeoutId);
-				reject({status: 'wrong', message: 'socket connection closed unexpectedly', data: undefined});
+				reject({status: 'wrong', message: 'The connection was closed abnormally', data: undefined});
 			}
 
 			this._ws.onclose = (event) =>
 			{
 				if(!event.wasClean)
 				{
-					let message = 'unknown reason';
+					let message = 'Unknown reason';
 
 					if(event.code == 1000)
-						message = 'normal closure';
+						message = 'Normal closure';
 					else if(event.code == 1001)
-						message = 'an endpoint is "going away"';
+						message = 'An endpoint is "going away"';
 					else if(event.code == 1002)
-						message = 'an endpoint is terminating the connection due to a protocol error';
+						message = 'An endpoint is terminating the connection due to a protocol error';
 					else if(event.code == 1003)
-						message = 'an endpoint is terminating the connection because it has received a type of data it cannot accept';
+						message = 'An endpoint is terminating the connection because it has received a type of data it cannot accept';
 					else if(event.code == 1004)
-						message = 'reserved';
+						message = 'Reserved';
 					else if(event.code == 1005)
-						message = 'no status code was actually present';
+						message = 'No status code was actually present';
 					else if(event.code == 1006)
-						message = 'the connection was closed abnormally';
+						message = 'The connection was closed abnormally';
 					else if(event.code == 1007)
-						message = 'an endpoint is terminating the connection because it has received data within a message that was not consistent with the type of the message';
+						message = 'An endpoint is terminating the connection because it has received data within a message that was not consistent with the type of the message';
 					else if(event.code == 1008)
-						message = 'an endpoint is terminating the connection because it has received a message that "violates its policy"';
+						message = 'An endpoint is terminating the connection because it has received a message that "violates its policy"';
 					else if(event.code == 1009)
-						message = 'an endpoint is terminating the connection because it has received a message that is too big for it to process';
+						message = 'An endpoint is terminating the connection because it has received a message that is too big for it to process';
 					else if(event.code == 1011)
-						message = 'a server is terminating the connection because it encountered an unexpected condition that prevented it from fulfilling the request';
+						message = 'A server is terminating the connection because it encountered an unexpected condition that prevented it from fulfilling the request';
 					else if(event.code == 1015)
-						message = 'the connection was closed due to a failure to perform a TLS handshake';
+						message = 'The connection was closed due to a failure to perform a TLS handshake';
+
+					clearTimeout(this._timeoutId);
 
 					this._closers.forEach((value, key, map) => {
 						value.callback({response: message}, value.smuggler);
 					});
 
-					clearTimeout(this._timeoutId);
 					reject({status: 'wrong', message: message, data: undefined});
 				}	
 			}
