@@ -19,7 +19,6 @@ export class ExtendedMap
 		if(!this._map.has(name))
 		{
 			this._map.set(name, {index: this.index(), object: object});
-			this.sort();
 
 			let entry: any = this._map.get(name);
 			return entry.object;
