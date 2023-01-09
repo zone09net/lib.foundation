@@ -1,6 +1,6 @@
 export class Mobile
 {
-	public static isMobile()
+	public static isMobile(): boolean
 	{
 		if(navigator.userAgent.match(/Android/i) ||
 			navigator.userAgent.match(/webOS/i) ||
