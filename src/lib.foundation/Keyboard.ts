@@ -96,7 +96,7 @@ export class Keyboard
 				}
 			}
 
-			event.preventDefault();
+			//event.preventDefault();
 		}
 	}
 }
