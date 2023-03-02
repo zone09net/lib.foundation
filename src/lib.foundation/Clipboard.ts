@@ -50,9 +50,27 @@ export class Clipboard
 				}
 			}
 		}
-		catch(err)
+		catch(exception)
 		{
-			console.error(err.name, err.message);
+			console.error(exception.name, exception.message);
+			console.log('make sure you are using https:// or localhost');
+		}
+	}
+
+	public static setContent(content: string): Promise<void>
+	{
+		try
+		{
+			return new Promise((resolve, reject) => {
+				navigator.clipboard.writeText(content).then(
+					() => { resolve(); },
+					() => { reject(); }
+				);
+			});
+		}
+		catch(exception)
+		{
+			console.error(exception.name, exception.message);
 			console.log('make sure you are using https:// or localhost');
 		}
 	}
