@@ -1,3 +1,6 @@
+/**
+ * @module lib.foundation
+ */
 export {Guid} from './lib.foundation/Guid.js';
 export {Mobile} from './lib.foundation/Mobile.js';
 export {ExtendedMap} from './lib.foundation/ExtendedMap.js';
