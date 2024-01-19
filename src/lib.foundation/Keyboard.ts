@@ -41,7 +41,7 @@ export class Keyboard
 			 keycode == 32 || keycode == 13     ||    // spacebar & return key(s)
 			 keycode == 35 || keycode == 36		||		// home & end
 			 keycode == 8 || keycode == 9       ||    // backspace, tab
-			 keycode == 46                      ||    // delete
+			 keycode == 46 || keycode == 27     ||    // delete, escape
 			(keycode > 36 && keycode < 41)      ||    // arrow keys
 			(keycode > 64 && keycode < 91)      ||    // letter keys upper
 			(keycode > 95 && keycode < 112)     ||    // numpad keys
@@ -55,7 +55,7 @@ export class Keyboard
 		if(event.altKey)
 			input += 'alt+';
 
-		if(valid)
+			if(valid)
 		{
 			if(event.key === 'ArrowRight')
 				input += 'right';
@@ -71,6 +71,8 @@ export class Keyboard
 				input += 'backspace';
 			else if(event.key === 'Delete')
 				input += 'delete';
+			else if(event.key === 'Escape')
+				input += 'escape';
 			else if(event.key === 'Tab')
 				input += 'tab';
 			else if(event.key === 'Home')
