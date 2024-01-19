@@ -1,10 +1,14 @@
 export class ExtendedMap
 {
-	private _sorted: Array<any> = [];
+	private _sorted: ExtendedMap;
 	private _map: Map<string, any> = new Map();
 	//---
 
-	public constructor() {}
+	public constructor(map?: Map<string, any>) 
+	{
+		if(map)
+			this._map = map;
+	}
 
 	public has(name: string): boolean
 	{
@@ -40,7 +44,7 @@ export class ExtendedMap
 		return this._map.delete(name);
 	}
 
-	public index(name?: string, index?: number): number
+	public index(key?: string, index?: number): number
 	{
 		let newindex: number = 0;
 
@@ -52,41 +56,81 @@ export class ExtendedMap
 				newindex = object.index;
 		});
 
-		if(name && index)
-			this._map.get(name).index = index;
+		if(key && index)
+			this._map.get(key).index = index;
 		else
 			return ++newindex;
 	}
 
 	public sort(): void
 	{
-		let entries: [string, any][] = [...this._map.entries()];
-		this._sorted = entries.sort((a, b) => { return a[1].index - b[1].index; }).filter(Boolean);
+		this._sorted = new ExtendedMap(
+			new Map(
+				[...this._map.entries()].sort((a, b) => { 
+					return a[1].index - b[1].index;
+				}).filter(Boolean))
+			);
 	}
 
 	public reverse(): void
 	{
-		let entries: [string, any][] = [...this._map.entries()];
-		this._sorted = entries.sort((a, b) => { return b[1].index - a[1].index; }).filter(Boolean);
+		this._sorted = new ExtendedMap(
+			new Map(
+				[...this._map.entries()].sort((a, b) => { 
+					return b[1].index - a[1].index; 
+				}).filter(Boolean)
+			)
+		);
 	}
 
 	public filter(func: any): Array<any>
 	{
 		let filtered: Array<any> = [];
 
-		for(let i = 0; i < this._sorted.length; i++)
-		{
-			if(func(this._sorted[i]))
-				filtered.push(this._sorted[i]);
-		}
+		this._map.forEach((value: any, key: string, map: Map<string, any>) => {
+			if(func(value.object, map.get(key).index))
+				filtered.push(value.object);
+		});
 
 		return filtered;
 	}
 
 	public clear(): void
 	{
-		this._sorted = [];
+		if(this._sorted)
+			this._sorted.clear();
+			
 		this._map.clear();
+	}
+
+	public forEach(func: any): void
+	{
+		this._map.forEach((value) => {
+			func(value.object);
+		});
+	}
+
+	[Symbol.iterator]() 
+	{
+		const values: any = this._map.values();
+		let index: number = -1;
+
+		return {
+			next: () => { 
+				let done: boolean = false;
+				let value: any
+
+				if(++index < this._map.size)
+					value = values.next().value.object;
+				else
+				{
+					value = undefined;
+					done = true;
+				}
+
+				return {value: value, done: done }
+			}
+		}
 	}
 
 
@@ -99,8 +143,11 @@ export class ExtendedMap
 		return this._map;
 	}
 
-	get sorted(): Array<any>
+	get sorted(): ExtendedMap
 	{
+		if(!this._sorted)
+			this._sorted = new ExtendedMap();
+
 		return this._sorted;
 	}
 }
