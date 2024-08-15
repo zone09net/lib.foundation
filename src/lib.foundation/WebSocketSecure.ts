@@ -37,7 +37,7 @@ export class WebSocketSecure
 
 	public attachParser(attachable: IWebSocketSecureAttachable): string
 	{
-		let guid: string = this._guids.create('1', '8');
+		let guid: string = this._guids.create('xxxxxxxx-xxxx-1xxx-8xxx-xxxxxxxxxxxx');
 
 		this._parsers.set(guid, attachable);
 
@@ -46,7 +46,7 @@ export class WebSocketSecure
 
 	public attachCloser(attachable: IWebSocketSecureAttachable): string
 	{
-		let guid: string = this._guids.create('1', '9');
+		let guid: string = this._guids.create('xxxxxxxx-xxxx-1xxx-9xxx-xxxxxxxxxxxx');
 
 		this._closers.set(guid, attachable);
 
