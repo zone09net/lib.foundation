@@ -22,3 +22,4 @@ export class Mobile
 		document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=' + width + ', initial-scale=' + scale + ', user-scalable=no');
 	}
 }
+

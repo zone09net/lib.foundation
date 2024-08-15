@@ -31,3 +31,4 @@ export interface IWebSocketSecureAttributes
 	parser?: IWebSocketSecureAttachable,
 	closer?: IWebSocketSecureAttachable,
 }
+

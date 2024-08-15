@@ -6,36 +6,29 @@ export class Guid
 
 	public constructor() {}
 
-	public create(version: string, variant: string): string
+	public create(pattern: string = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'): string
 	{
 		let guid: string;
 
 		if(!this._force)
 		{
-			version = version ? (/1|2|3|4|5/.test(version) ? version : '1') : '1';
-			variant = variant ? (/8|9|a|b/.test(variant) ? variant : 'a') : 'a';
-
-			//let str = 'xxxxxxxx-xxxx-' + version + 'xxx-' + variant + 'xxx-xxxxxxxxxxxx';
-
 			do
-			{
-				/*
-				guid = str.replace(/[xy]/g, () => {
+			{	
+				guid = pattern.replace(/[x]/g, () => {
 					return (Math.random() * 16 | 0).toString(16);
 				});
-				*/
 				
-				let random: string = Math.random().toString(16).substring(2) + Math.random().toString(16).substring(2) + Math.random().toString(16).substring(2);
-				let splitted: Array<string> = random.substring(0, 36).split('');
+				//let random: string = Math.random().toString(16).substring(2) + Math.random().toString(16).substring(2) + Math.random().toString(16).substring(2);
+				//let splitted: Array<string> = random.substring(0, 36).split('');
 
-				splitted[8] = '-';
-				splitted[13] = '-';
-				splitted[14] = version
-				splitted[18] = '-';
-				splitted[19] = variant
-				splitted[23] = '-';
+				//splitted[8] = '-';
+				//splitted[13] = '-';
+				//splitted[14] = version
+				//splitted[18] = '-';
+				//splitted[19] = variant
+				//splitted[23] = '-';
 
-				guid = splitted.join('');
+				//guid = splitted.join('');
 			}
 			while(this._guids.includes(guid))
 		}
