@@ -39,6 +39,11 @@ export class ExtendedMap
 			return undefined;
 	}
 
+	public first(): any
+	{
+		return this._map.entries().next().value[0];
+	}
+
 	public delete(name: string): boolean
 	{
 		return this._map.delete(name);
