@@ -5,9 +5,17 @@
 	"explorer.confirmDelete": false,
 	"breadcrumbs.enabled": false,
 	"terminal.explorerKind": "external",
+	"terminal.integrated.profiles.windows": {
+		 "Command Prompt": {
+			"path": "C:\\WINDOWS\\System32\\cmd.exe",
+			"args": []
+		 }
+	},
 	"terminal.integrated.defaultProfile.windows": "Command Prompt",
-   "terminal.integrated.automationShell.windows": "cmd.exe",
-   
+
+	"editor.cursorStyle": "block",
+	"editor.cursorBlinking": "solid",
+
    "php.suggest.basic": false,
 	
    //"intelephense.files.exclude": [
@@ -46,14 +54,14 @@
 					"foreground": "#8c6325"
 				}
 			}
-		],
+		]
 	},
 
 	"todohighlight.keywords": [
 		{
 			"text": "@param",
 			"color": "#deaf2f",
-			"backgroundColor": "#282C34",
+			"backgroundColor": "#282C34"
 	   },
 		{
 			"text": "@return",
@@ -67,28 +75,33 @@
 		{
 			"text": "@todo",
 			"color": "#bd3a2e",
-			"backgroundColor": "#282C34",
+			"backgroundColor": "#282C34"
 	   },
 		{
 			"text": "@fixme",
 			"color": "#869149",
-			"backgroundColor": "#282C34",
+			"backgroundColor": "#282C34"
 	  	},
 		{
 			"text": "@internal",
 			"color": "#8c6325",
-			"backgroundColor": "#282C34",
+			"backgroundColor": "#282C34"
 	  	},
 		  {
 			"text": "@ignore",
 			"color": "#8c6325",
-			"backgroundColor": "#282C34",
+			"backgroundColor": "#282C34"
 	  	},
 		{
 			"text": "@module",
 			"color": "#8c6325",
-			"backgroundColor": "#282C34",
+			"backgroundColor": "#282C34"
 	  	},
+		{
+			"text": "@defaultvalue",
+			"color": "#8c6325",
+			"backgroundColor": "#282C34"
+	  	}
   ],
 
   "better-comments.tags": [
@@ -155,5 +168,14 @@
 			"bold": false,
 			"italic": false
 		},
-	],
+		{
+			"tag": "@defaultvalue",
+			"color": "#8c6325",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		}
+	]
 }
