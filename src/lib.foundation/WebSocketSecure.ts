@@ -12,6 +12,7 @@ export class WebSocketSecure
 	private _guids: Guid = new Guid();
 	private _timeoutMs: number = 5000;
 	private _timeoutId: number = undefined;
+	private _keepaliveID: number = undefined;
 	private _parsers: Map<string, IWebSocketSecureAttachable> = new Map();
 	private _closers: Map<string, IWebSocketSecureAttachable> = new Map();
 	private _parser: IWebSocketSecureAttachable;
@@ -89,6 +90,11 @@ export class WebSocketSecure
 
 			this._ws.onopen = () =>
 			{
+				this._keepaliveID = setInterval(() => {
+					if(this.isConnected())
+						this._ws.send('keep-alive');
+				}, 20000); 
+
 				resolve(true);
 			}
 
@@ -142,6 +148,7 @@ export class WebSocketSecure
 						message = 'The connection was closed due to a failure to perform a TLS handshake';
 
 					clearTimeout(this._timeoutId);
+					clearTimeout(this._keepaliveID);
 
 					this._closers.forEach((value, key, map) => {
 						value.callback({response: message}, value.smuggler);
