@@ -12,10 +12,19 @@
 		 }
 	},
 	"terminal.integrated.defaultProfile.windows": "Command Prompt",
+	"terminal.integrated.cursorBlinking": true,
 
-	"editor.cursorStyle": "block",
-	"editor.cursorBlinking": "solid",
-
+	"editor.cursorStyle": "line",
+	"editor.cursorBlinking": "blink",
+	"editor.occurrencesHighlight": false,
+	"editor.hover.delay": 500,
+	"editor.matchBrackets": "near",
+	"editor.renderIndentGuides": false,
+	"editor.autoClosingBrackets": "never",
+	"editor.autoClosingDelete": "never",
+	"editor.autoClosingOvertype": "never",
+	"editor.autoClosingQuotes": "never",
+	
    "php.suggest.basic": false,
 	
    //"intelephense.files.exclude": [

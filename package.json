@@ -13,10 +13,13 @@
 		"clean:minify": "if exist .minify rmdir /s /q .minify",
 		"clean": "concurrently --kill-others \"npm run clean:dist\" \"npm run clean:rollup\" \"npm run clean:obfuscator\" \"npm run clean:minify\"",
 		
-   	"build": "tsc --build && tsc-alias",
-		"build:watch": "concurrently --kill-others -p \"[{name}]\" -n \"watch,alias\" -c \"red.bold,yellow.bold\" \"tsc -w\" \"tsc-alias -w\"",
-		"rollup": "tsc --build --force && rollup -c rollup.config.js",
-		"obfuscator": "javascript-obfuscator ./.rollup --output ./.obfuscator --compact true --exclude ./rollup/extlib/**/**",
-		"minify": "if not exist .minify mkdir .minify && minify ./.rollup/lib.foundation.js > ./.minify/lib.foundation.js"
+		"build": "tsc --build --force",
+		"rollup": "rollup -c rollup.config.js",
+		"obfuscator": "javascript-obfuscator ./.rollup --output ./.obfuscator --compact true --string-array false --identifier-names-generator mangled --simplify true --exclude ./.rollup/extlib/**/**",
+		"minify": "if not exist .minify mkdir .minify && minify ./.rollup/lib.foundation.js > ./.minify/lib.foundation.js",
+		"dist": "npm run -s clean && npm run build && npm run -s rollup && npm run -s minify && npm run -s obfuscator",
+	
+		"dev": "tsc --build --force && tsc-alias",
+		"watch": "concurrently --kill-others -p \"[{name}]\" -n \"watch,alias\" -c \"red.bold,yellow.bold\" \"tsc --build -w\" \"tsc-alias -w\""
   	}
 }
