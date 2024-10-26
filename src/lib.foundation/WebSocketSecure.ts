@@ -26,6 +26,8 @@ export class WebSocketSecure
 		if(attributes.parser)
 		{
 			this._parser = attributes.parser;
+
+			this._parsers.set('00000000-0000-0000-0000-000000000000', attributes.parser);
 			this.attachParser(attributes.parser);
 		}
 		else
