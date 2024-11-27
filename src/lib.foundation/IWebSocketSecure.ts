@@ -10,7 +10,7 @@ export interface IWebSocketSecureResponse
 {
 	status: number | string, 
 	message: string, 
-	data: any
+	data?: any
 }
 
 export interface IWebSocketSecureCallback 
@@ -28,6 +28,7 @@ export interface IWebSocketSecureAttachable
 export interface IWebSocketSecureAttributes
 {
 	link?: string,
+	initier?: IWebSocketSecureAttachable,
 	parser?: IWebSocketSecureAttachable,
 	closer?: IWebSocketSecureAttachable,
 }

@@ -10,7 +10,7 @@ export class WebSocketSecure
 {
 	private _ws: WebSocket;
 	private _guids: Guid = new Guid();
-	private _timeoutMs: number = 5000;
+	private _timeoutMs: number = 20000;
 	private _timeoutId: number = undefined;
 	private _keepaliveID: number = undefined;
 	private _parsers: Map<string, IWebSocketSecureAttachable> = new Map();
@@ -23,16 +23,16 @@ export class WebSocketSecure
 	{
 		this._link = attributes.link;
 
-		if(attributes.parser)
+		if(attributes.initier)
 		{
-			this._parser = attributes.parser;
-
-			this._parsers.set('00000000-0000-0000-0000-000000000000', attributes.parser);
-			this.attachParser(attributes.parser);
+			this._parsers.set('00000000-0000-0000-0000-000000000000', attributes.initier);
+			this.attachParser(attributes.initier);
 		}
+
+		if(attributes.parser)
+			this._parser = attributes.parser;
 		else
 			this._parser = {callback: (raw: IWebSocketSecureRaw, smuggler: any): IWebSocketSecureCallback => { return {success: true, response: raw.response}; }, smuggler: {}};
-
 
 		if(attributes.closer)
 			this.attachCloser(attributes.closer);
@@ -94,7 +94,7 @@ export class WebSocketSecure
 			{
 				this._keepaliveID = setInterval(() => {
 					if(this.isConnected())
-						this._ws.send('keep-alive');
+						this._ws.send(JSON.stringify({query: 'keep-alive'}));
 				}, 20000); 
 
 				resolve(true);
@@ -228,6 +228,25 @@ export class WebSocketSecure
 	public setTimeout(ms: number): void
 	{
 		this._timeoutMs = ms;
+	}
+
+	public static undefined(source: Array<any> | any): boolean
+	{
+		if(Array.isArray(source))
+		{
+			for(let subsource of source)
+			{
+				if(subsource === undefined)
+					return true;
+			}
+		}
+		else
+		{
+			if(source === undefined)
+				return true;
+		}
+	
+		return false;
 	}
 }
 
