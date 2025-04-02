@@ -7,6 +7,8 @@ export class Keyboard
 		['key', [this.onKeyup]]
 	]);;
 	private _element: HTMLElement;
+	private _keyup: any;
+	private _keydown: any;
 	private _smuggler: any;
 	//---
 
@@ -18,14 +20,17 @@ export class Keyboard
 
 	public enable(): void
 	{
-		this._element.addEventListener("keydown", this.handleKeydown.bind(null, this), false);
-		this._element.addEventListener("keyup", this.handleUp.bind(null, this), false);
+		this._keydown = this.handleKeydown.bind(null, this);
+		this._keyup = this.handleUp.bind(null, this);
+
+		this._element.addEventListener("keydown", this._keydown, false);
+		this._element.addEventListener("keyup", this._keyup, false);
 	}
 
 	public disable(): void
 	{
-		this._element.removeEventListener("keydown", this.handleKeydown.bind(null, this), false);
-		this._element.removeEventListener("keyup", this.handleUp.bind(null, this), false);
+		this._element.removeEventListener("keydown", this._keydown, false);
+		this._element.removeEventListener("keyup", this._keyup, false);
 	}
 
 	public setKeydownCallbacks(callbacks: Map<string, Array<(event: HTMLElementEventMap['keydown'], smuggler?: any) => void>>): void
