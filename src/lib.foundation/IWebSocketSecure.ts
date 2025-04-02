@@ -4,6 +4,7 @@ export interface IWebSocketSecureRaw
 	id?: number,
 	ip?: string,
 	response?: IWebSocketSecureResponse | any,
+	request?: IWebSocketSecureRequest,
 }
 
 export interface IWebSocketSecureResponse 
@@ -11,6 +12,13 @@ export interface IWebSocketSecureResponse
 	status: number | string, 
 	message: string, 
 	data?: any
+}
+
+export interface IWebSocketSecureRequest
+{
+	route?: string,
+	query?: string,
+	placeholders?: any[],
 }
 
 export interface IWebSocketSecureCallback 
