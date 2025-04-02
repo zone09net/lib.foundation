@@ -16,7 +16,7 @@
 		"build": "tsc --build --force",
 		"rollup": "rollup -c rollup.config.js",
 		"obfuscator": "javascript-obfuscator ./.rollup --output ./.obfuscator --compact true --string-array false --identifier-names-generator mangled --simplify true --exclude ./.rollup/extlib/**/**",
-		"minify": "if not exist .minify mkdir .minify && minify ./.rollup/lib.foundation.js > ./.minify/lib.foundation.js",
+		"minify": "if not exist .minify mkdir .minify && terser ./.rollup/lib.foundation.js -o ./.minify/lib.foundation.js --keep-classnames --keep-fnames --ecma 2016",
 		"dist": "npm run -s clean && npm run build && npm run -s rollup && npm run -s minify && npm run -s obfuscator",
 	
 		"dev": "tsc --build --force && tsc-alias",
